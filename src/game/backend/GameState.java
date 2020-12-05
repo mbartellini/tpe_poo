@@ -1,9 +1,14 @@
 package game.backend;
 
 public abstract class GameState {
-	
-	private long score = 0;
-	private int moves = 0;
+
+	private final int maxMoves;
+	private long score;
+	private int moves;
+
+	public GameState(int maxMoves){
+		this.maxMoves = maxMoves;
+	}
 	
 	public void addScore(long value) {
 		this.score = this.score + value;
@@ -20,8 +25,10 @@ public abstract class GameState {
 	public int getMoves() {
 		return moves;
 	}
-	
-	public abstract boolean gameOver();
+
+	public boolean gameOver() {
+		return playerWon() || getMoves() >= maxMoves;
+	}
 	
 	public abstract boolean playerWon();
 

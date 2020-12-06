@@ -17,9 +17,9 @@ import game.backend.element.Nothing;
 
 public class Level2 extends LevelGenerator {
 
-    private static int REQUIRED_FRUITS = 3;
-    private static int FRUIT_LIMIT = 3;
-    private static int MAX_MOVES = 20;
+    private final static int REQUIRED_FRUITS = 3;
+    private final static int MAX_MOVES = 20;
+    private int consumedFruits;
 
     @Override
     public void initialize(){
@@ -28,13 +28,13 @@ public class Level2 extends LevelGenerator {
             public void gridUpdated() {
                 for (int j = 0; j < SIZE; j++){
                     Element e = get(SIZE - 1, j);
-                    if (e instanceof Fruit) { /* Forma mas OO? */
-                        ((Level2State)state()).consumeFruit();
+                    if (e.getKey().equals("FRUIT")) { /* Forma mas OO? */
+                        consumeFruit();
                         setContent(SIZE - 1, j, new Nothing());
                         state().addScore(e.getScore());
-                        fallElements();
                     }
                 }
+                fallElements();
             }
 
             @Override
@@ -47,7 +47,7 @@ public class Level2 extends LevelGenerator {
 
     @Override
     protected GameState newState() {
-        return new Level2State(REQUIRED_FRUITS, MAX_MOVES);
+        return new Level2State(MAX_MOVES);
     }
 
     @Override
@@ -55,32 +55,32 @@ public class Level2 extends LevelGenerator {
         return new CandyFruitGeneratorCell(this);
     }
 
-
     @Override
     public boolean tryMove(int i1, int j1, int i2, int j2) {
-        CandyFruitGeneratorCell.askFruit();
+        // Como se genera una fruta por movimiento, a partir de que ya se generaron la cantidad
+        // de frutas requeridas, se deja de pedir frutas
+        if(state().getMoves() < REQUIRED_FRUITS)
+            CandyFruitGeneratorCell.askFruit();
         return super.tryMove(i1, j1, i2, j2);
     }
 
-    private static class Level2State extends GameState {
-        private final int requiredFruits;
-        private int consumedFruits;
+    public int getFruits(){
+        return consumedFruits;
+    }
 
-        public Level2State(int requiredFruits, int maxMoves) {
+    public void consumeFruit(){
+        consumedFruits++;
+    }
+
+    private class Level2State extends GameState {
+
+        public Level2State(int maxMoves) {
             super(maxMoves);
-            this.requiredFruits = requiredFruits;
         }
 
-        public int getFruits(){
-            return consumedFruits;
-        }
-
-        public void consumeFruit(){
-            consumedFruits++;
-        }
-
+        @Override
         public boolean playerWon() {
-            return getFruits() >= requiredFruits;
+            return getFruits() >= REQUIRED_FRUITS;
         }
     }
 

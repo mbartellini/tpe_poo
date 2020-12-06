@@ -1,6 +1,7 @@
 package game.backend.level;
 
 import game.backend.GameState;
+import game.backend.cell.CandyGeneratorCell;
 
 public class Level1 extends LevelGenerator {
 	
@@ -13,7 +14,12 @@ public class Level1 extends LevelGenerator {
 		return new Level1State(REQUIRED_SCORE, MAX_MOVES);
 	}
 
-	
+	@Override
+	protected CandyGeneratorCell getGeneratorCell() {
+		return new CandyGeneratorCell(this);
+	}
+
+
 	private static class Level1State extends GameState {
 		private final long requiredScore;
 		

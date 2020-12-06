@@ -12,13 +12,14 @@ public abstract class LevelGenerator extends Grid {
     private Cell candyGenCell;
 
     protected abstract GameState newState();
+    protected abstract CandyGeneratorCell getGeneratorCell();
 
     @Override
     protected void fillCells() {
 
         wallCell = new Cell(this);
         wallCell.setContent(new Wall());
-        candyGenCell = new CandyGeneratorCell(this);
+        candyGenCell = getGeneratorCell();
 
         //corners
         g()[0][0].setAround(candyGenCell, g()[1][0], wallCell, g()[0][1]);

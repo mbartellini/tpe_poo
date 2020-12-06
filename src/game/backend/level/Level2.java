@@ -2,6 +2,7 @@ package game.backend.level;
 
 import game.backend.GameState;
 import game.backend.Grid;
+import game.backend.cell.CandyFruitGeneratorCell;
 import game.backend.cell.CandyGeneratorCell;
 
 /**
@@ -18,6 +19,18 @@ public class Level2 extends LevelGenerator {
     @Override
     protected GameState newState() {
         return new Level2State(REQUIRED_FRUITS, MAX_MOVES);
+    }
+
+    @Override
+    protected CandyGeneratorCell getGeneratorCell() {
+        return new CandyFruitGeneratorCell(this);
+    }
+
+
+    @Override
+    public boolean tryMove(int i1, int j1, int i2, int j2) {
+        CandyFruitGeneratorCell.askFruit();
+        return super.tryMove(i1, j1, i2, j2);
     }
 
     private static class Level2State extends GameState {

@@ -1,9 +1,13 @@
 package game.backend.level;
 
+import game.backend.GameListener;
 import game.backend.GameState;
 import game.backend.Grid;
 import game.backend.cell.CandyFruitGeneratorCell;
 import game.backend.cell.CandyGeneratorCell;
+import game.backend.element.Element;
+import game.backend.element.Fruit;
+import game.backend.element.Nothing;
 
 /**
  * Clase que modela el segundo nivel, que incorpora la funcionalidad número cinco, frutas.
@@ -14,7 +18,32 @@ import game.backend.cell.CandyGeneratorCell;
 public class Level2 extends LevelGenerator {
 
     private static int REQUIRED_FRUITS = 3;
+    private static int FRUIT_LIMIT = 3;
     private static int MAX_MOVES = 20;
+
+    @Override
+    public void initialize(){
+        addListener(new GameListener() {
+            @Override
+            public void gridUpdated() {
+                for (int j = 0; j < SIZE; j++){
+                    Element e = get(SIZE - 1, j);
+                    if (e instanceof Fruit) { /* Forma mas OO? */
+                        ((Level2State)state()).consumeFruit();
+                        setContent(SIZE - 1, j, new Nothing());
+                        state().addScore(e.getScore());
+                        fallElements();
+                    }
+                }
+            }
+
+            @Override
+            public void cellExplosion(Element e) {
+                //
+            }
+        });
+        super.initialize();
+    }
 
     @Override
     protected GameState newState() {

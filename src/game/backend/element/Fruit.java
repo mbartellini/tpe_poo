@@ -18,4 +18,14 @@ public class Fruit extends Element {
         return "FRUIT";
     }
 
+    @Override
+    public boolean isExplodeable(){
+        return false;
+    }
+
+    @Override
+    public long getScore() {
+        return 500;
+    }
+
 }

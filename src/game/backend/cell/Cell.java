@@ -38,6 +38,14 @@ public class Cell {
 	public Element getContent() {
 		return content;
 	}
+
+	public boolean isGolden(){
+		return false;
+	}
+
+	public void turnGolden(){
+		//
+	}
 	
 	public void clearContent() {
 		if (content.isMovable() && content.isExplodeable()) {

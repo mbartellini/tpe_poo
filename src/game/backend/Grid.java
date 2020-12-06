@@ -26,6 +26,10 @@ public abstract class Grid {
 	
 	protected abstract GameState newState();
 	protected abstract void fillCells();
+
+	protected Cell cellSupplier(){
+		return new Cell(this);
+	}
 	
 	protected Cell[][] g() {
 		return g;
@@ -40,7 +44,7 @@ public abstract class Grid {
 		figureDetector = new FigureDetector(this);
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
-				g[i][j] = new Cell(this);
+				g[i][j] = cellSupplier();
 				gMap.put(g[i][j], new Point(i,j));
 			}
 		}

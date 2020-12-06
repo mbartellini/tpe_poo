@@ -11,8 +11,9 @@ public abstract class LevelGenerator extends Grid {
     private Cell wallCell;
     private Cell candyGenCell;
 
-    protected abstract GameState newState();
-    protected abstract CandyGeneratorCell getGeneratorCell();
+    protected CandyGeneratorCell getGeneratorCell(){
+        return new CandyGeneratorCell(this);
+    }
 
     @Override
     protected void fillCells() {

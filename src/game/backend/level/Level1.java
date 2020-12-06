@@ -25,5 +25,10 @@ public class Level1 extends LevelGenerator {
 		public boolean playerWon() {
 			return getScore() > requiredScore;
 		}
+
+		@Override
+		public String getStateString() {
+			return String.format("Puntaje: %d", getScore());
+		}
 	}
 }

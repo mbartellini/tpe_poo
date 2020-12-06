@@ -63,6 +63,10 @@ public class Level3 extends LevelGenerator {
         goldenCells += amount;
     }
 
+    public int getGoldenCells(){
+        return goldenCells;
+    }
+
     private class Level3State extends GameState {
 
         public Level3State(int maxMoves) {
@@ -72,6 +76,11 @@ public class Level3 extends LevelGenerator {
         @Override
         public boolean playerWon() {
             return goldenCells == SIZE * SIZE;
+        }
+
+        @Override
+        public String getStateString() {
+            return String.format("Celdas restantes: %d - Puntaje: %d", SIZE * SIZE - getGoldenCells(), getScore());
         }
     }
 }

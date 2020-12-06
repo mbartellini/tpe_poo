@@ -32,6 +32,7 @@ public class CandyFrame extends VBox {
 		scorePanel = new ScorePanel();
 		getChildren().add(scorePanel);
 		game.initGame();
+		scorePanel.updateScore(game().getState().getStateString());
 		GameListener listener;
 		game.addGameListener(listener = new GameListener() {
 			@Override
@@ -70,12 +71,12 @@ public class CandyFrame extends VBox {
 				if (newPoint != null) {
 					System.out.println("Get second = " +  newPoint);
 					game().tryMove((int)lastPoint.getX(), (int)lastPoint.getY(), (int)newPoint.getX(), (int)newPoint.getY());
-					String message = ((Long)game().getScore()).toString();
+					String message = game().getState().getStateString();
 					if (game().isFinished()) {
 						if (game().playerWon()) {
-							message = message + " Finished - Player Won!";
+							message = "Finished - Player Won!";
 						} else {
-							message = message + " Finished - Loser !";
+							message = "Finished - Loser!";
 						}
 					}
 					scorePanel.updateScore(message);

@@ -82,6 +82,11 @@ public class Level2 extends LevelGenerator {
         public boolean playerWon() {
             return getFruits() >= REQUIRED_FRUITS;
         }
+
+        @Override
+        public String getStateString() {
+            return String.format("Frutas restantes: %d - Puntaje: %d", REQUIRED_FRUITS - getFruits(), getScore());
+        }
     }
 
 }

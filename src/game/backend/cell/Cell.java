@@ -7,8 +7,8 @@ import game.backend.move.Direction;
 
 public class Cell {
 	
-	private Grid grid;
-	private Cell[] around = new Cell[Direction.values().length];
+	private final Grid grid;
+	private final Cell[] around = new Cell[Direction.values().length];
 	private Element content;
 	
 	public Cell(Grid grid) {
@@ -38,9 +38,17 @@ public class Cell {
 	public Element getContent() {
 		return content;
 	}
+
+	public boolean isGolden(){
+		return false;
+	}
+
+	public void turnGolden(){
+		//
+	}
 	
 	public void clearContent() {
-		if (content.isMovable()) {
+		if (content.isMovable() && content.isExplodeable()) {
 			Direction[] explosionCascade = content.explode();
 			grid.cellExplosion(content);
 			this.content = new Nothing();

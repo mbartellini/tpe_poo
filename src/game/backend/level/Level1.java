@@ -15,6 +15,7 @@ public class Level1 extends LevelGenerator {
 	}
 
 	private static class Level1State extends GameState {
+
 		private final long requiredScore;
 		
 		public Level1State(long requiredScore, int maxMoves) {
@@ -27,4 +28,5 @@ public class Level1 extends LevelGenerator {
 		}
 
 	}
+
 }

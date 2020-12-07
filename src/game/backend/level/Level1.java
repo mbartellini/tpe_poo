@@ -26,9 +26,5 @@ public class Level1 extends LevelGenerator {
 			return getScore() > requiredScore;
 		}
 
-		@Override
-		public String getStateString() {
-			return String.format("Puntaje: %d", getScore());
-		}
 	}
 }

@@ -32,6 +32,8 @@ public abstract class GameState {
 	
 	public abstract boolean playerWon();
 
-	public abstract String getStateString();
+	public String getStateString() {
+		return String.format("Puntaje: %d - Movimientos: %d/%d", getScore(), moves, maxMoves);
+	}
 
 }

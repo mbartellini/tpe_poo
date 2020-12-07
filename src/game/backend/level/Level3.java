@@ -80,7 +80,7 @@ public class Level3 extends LevelGenerator {
 
         @Override
         public String getStateString() {
-            return String.format("Celdas restantes: %d - Puntaje: %d", SIZE * SIZE - getGoldenCells(), getScore());
+            return String.format("Celdas restantes: %d - ", SIZE * SIZE - getGoldenCells()) + super.getStateString();
         }
     }
 }

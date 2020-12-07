@@ -43,7 +43,7 @@ public class Cell {
 		return false;
 	}
 
-	public void turnGolden(){
+	public void turnGolden() {
 		//
 	}
 	

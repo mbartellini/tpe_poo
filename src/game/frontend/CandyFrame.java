@@ -7,11 +7,17 @@ import game.backend.element.Element;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.Optional;
 
 public class CandyFrame extends VBox {
 
@@ -23,7 +29,7 @@ public class CandyFrame extends VBox {
 	private Point2D lastPoint;
 	private CandyGame game;
 
-	public CandyFrame(CandyGame game) {
+	public CandyFrame(CandyGame game, Stage currStage) {
 		this.game = game;
 		getChildren().add(new AppMenu());
 		images = new ImageManager();
@@ -46,8 +52,8 @@ public class CandyFrame extends VBox {
 						int finalJ = j;
 						Cell cell = CandyFrame.this.game.get(i, j);
 						Image image = images.getImage(cell.getContent());
-						//timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, null, cell.isGolden())));
-						timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, image, cell.isGolden())));
+						// timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, null, cell)));
+						timeLine.getKeyFrames().add(new KeyFrame(frameTime, e -> boardPanel.setImage(finalI, finalJ, image, cell)));
 					}
 					frameTime = frameTime.add(frameGap);
 				}
@@ -71,15 +77,24 @@ public class CandyFrame extends VBox {
 					System.out.println("Get second = " +  newPoint);
 					game().tryMove((int)lastPoint.getX(), (int)lastPoint.getY(), (int)newPoint.getX(), (int)newPoint.getY());
 					String message = game().getState().getStateString();
-					if (game().isFinished()) {
-						if (game().playerWon()) {
-							message = "Finished - Player Won!";
-						} else {
-							message = "Finished - Loser!";
-						}
-					}
 					scorePanel.updateScore(message);
 					lastPoint = null;
+					if (game().isFinished()) {
+						Alert gameOverAlert;
+						if (game().playerWon()) {
+							gameOverAlert = new GameOverAlert("Finished - Winner");
+						} else {
+							gameOverAlert = new GameOverAlert("Finished - Loser");
+						}
+						Optional<ButtonType> result = gameOverAlert.showAndWait();
+						if(result.isPresent()) {
+							if (result.get() == ButtonType.OK) {
+								currStage.close();
+							} else {
+								Platform.exit();
+							}
+						}
+					}
 				}
 			}
 		});

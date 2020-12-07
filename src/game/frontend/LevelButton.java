@@ -4,23 +4,24 @@ import game.backend.CandyGame;
 import game.backend.level.LevelGenerator;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LevelButton extends Button {
 
-    private final Class<? extends LevelGenerator> level;
-
-    public LevelButton(String text, Class<? extends LevelGenerator> level, Stage stage) {
-        super();
+    public LevelButton(String text, Class<? extends LevelGenerator> level, Stage parentStage) {
         setText(text);
-        this.level = level;
-        setOnAction(event ->{
-            CandyGame game = new CandyGame(level);
-            CandyFrame frame = new CandyFrame(game);
-            Scene scene = new Scene(frame);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
+        setOnAction(event -> {
+            Stage levelStage = new Stage();
+            CandyGame levelGame = new CandyGame(level);
+            CandyFrame levelFrame = new CandyFrame(levelGame, levelStage);
+            Scene levelScene = new Scene(levelFrame);
+
+            levelStage.setResizable(false);
+            levelStage.setScene(levelScene);
+            levelStage.initModality(Modality.WINDOW_MODAL);
+            levelStage.initOwner(parentStage);
+            levelStage.show();
         });
     }
 

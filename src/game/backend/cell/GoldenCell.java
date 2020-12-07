@@ -18,4 +18,5 @@ public class GoldenCell extends Cell {
     public void turnGolden(){
         golden = true;
     }
+
 }

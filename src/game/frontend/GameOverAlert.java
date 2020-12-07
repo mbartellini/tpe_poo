@@ -10,19 +10,10 @@ import java.util.Optional;
 
 public class GameOverAlert extends Alert {
 
-    public GameOverAlert(String state, Stage stage, Scene scene) {
+    public GameOverAlert(String state) {
         super(AlertType.CONFIRMATION);
         setTitle("Game over!");
         setHeaderText(state);
-        setContentText("¿Volver al menú principal?");
-        Optional<ButtonType> result = showAndWait();
-        if(result.isPresent()) {
-            if (result.get() == ButtonType.OK) {
-                stage.setScene(scene);
-            } else {
-                Platform.exit();
-            }
-        }
-
+        setContentText("Back to main menu?");
     }
 }

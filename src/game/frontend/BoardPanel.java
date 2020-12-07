@@ -1,5 +1,6 @@
 package game.frontend;
 
+import game.backend.cell.Cell;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
@@ -25,9 +26,9 @@ public class BoardPanel extends TilePane {
 		}
 	}
 	
-	public void setImage(int row, int column, Image image, boolean isGolden) {
+	public void setImage(int row, int column, Image image, Cell c) {
 		cells[row][column].setImage(image);
-		if(isGolden) {
+		if(c.isGolden()) {
 			Light.Distant spotLight = new Light.Distant();
 			spotLight.setColor(Color.YELLOW);
 			spotLight.setElevation(100);

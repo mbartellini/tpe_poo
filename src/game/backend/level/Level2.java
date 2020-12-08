@@ -85,7 +85,7 @@ public class Level2 extends LevelGenerator {
 
         @Override
         public String getStateString() {
-            return String.format("Frutas restantes: %d - ", REQUIRED_FRUITS - getFruits()) + super.getStateString();
+            return String.format("Fruits left: %d - ", REQUIRED_FRUITS - getFruits()) + super.getStateString();
         }
     }
 

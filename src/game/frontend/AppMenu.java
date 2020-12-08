@@ -29,7 +29,7 @@ public class AppMenu extends MenuBar {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Acerca De");
             alert.setHeaderText("Candy TPE");
-            alert.setContentText("Cátedra POO 2018.\n" +
+            alert.setContentText("Cátedra POO 2020.\n" +
                     "Implementación Original: Laura Zabaleta (POO 2013).");
             alert.showAndWait();
         });

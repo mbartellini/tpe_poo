@@ -25,12 +25,11 @@ public class GameApp extends Application {
 	public void start(Stage stage) {
 		BorderPane borderPane = new BorderPane();
 
-		// Tres botones de niveles horizontalmente dispeustos
+		// Tres botones de niveles horizontalmente dispuestos
 		HBox hBox = new HBox();
 		LevelButton level1 = new LevelButton("Level 1", Level1.class, stage);
 		LevelButton level2 = new LevelButton("Level 2", Level2.class, stage);
 		LevelButton level3 = new LevelButton("Level 3", Level3.class, stage);
-
 
 		hBox.getChildren().addAll(level1, level2, level3);
 		hBox.setSpacing(120);

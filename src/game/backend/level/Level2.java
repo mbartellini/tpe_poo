@@ -28,7 +28,7 @@ public class Level2 extends LevelGenerator {
             public void gridUpdated() {
                 for (int j = 0; j < SIZE; j++){
                     Element e = get(SIZE - 1, j);
-                    if (e.getKey().equals("FRUIT")) {
+                    if (e instanceof Fruit) {
                         consumeFruit();
                         setContent(SIZE - 1, j, new Nothing());
                         state().addScore(e.getScore());

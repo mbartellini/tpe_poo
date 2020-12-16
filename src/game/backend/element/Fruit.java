@@ -6,7 +6,13 @@ package game.backend.element;
 
 public class Fruit extends Element {
 
+    private FruitType fruitType;
+
     public Fruit() {
+    }
+
+    public Fruit(FruitType fruitType) {
+        this.fruitType = fruitType;
     }
 
     @Override
@@ -28,4 +34,8 @@ public class Fruit extends Element {
         return 500;
     }
 
+    @Override
+    public String getFullKey() {
+        return fruitType.toString();
+    }
 }

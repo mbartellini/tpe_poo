@@ -9,7 +9,7 @@ import java.util.Map;
 public class ImageManager {
 
 	private static final String IMAGE_PATH = "images/";
-	private Map<String, Image> images;
+	private final Map<String, Image> images;
 
 	public ImageManager() {
 		WrappedCandy wc = new WrappedCandy();
@@ -28,8 +28,9 @@ public class ImageManager {
 			hc.setColor(cc);
 			images.put(hc.getFullKey(),  new Image(IMAGE_PATH + cc.toString().toLowerCase() + "HStripped.png"));
 		}
-		images.put(new Hazelnut().getFullKey(), new Image(IMAGE_PATH + "hazelnut.png"));
-		images.put(new Cherry().getFullKey(), new Image(IMAGE_PATH + "cherry.png"));
+		for (FruitType ft : FruitType.values()) {
+			images.put(new Fruit(ft).getFullKey(), new Image(IMAGE_PATH + ft.toString().toLowerCase() + ".png"));
+		}
 	}
 
 	public Image getImage(Element e) {

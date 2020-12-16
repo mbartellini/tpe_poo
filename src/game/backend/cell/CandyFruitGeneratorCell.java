@@ -18,9 +18,8 @@ public class CandyFruitGeneratorCell extends CandyGeneratorCell {
     }
 
     private Element getRandomFruit() {
-        Random r = new Random();
-        int i = r.nextInt(2);
-        return (i%2 == 0) ? new Hazelnut() : new Cherry();
+        int i = (int)(Math.random() * FruitType.values().length);
+        return new Fruit(FruitType.values()[i]);
     }
 
     @Override
